@@ -1,0 +1,28 @@
+Gp=tf(conv([-90.79],[1 -200]),conv([1 6.26],[1 200]))
+Gc=tf([0.137 11.03],[1 0.4792 0])
+OLTF = Gp*Gc
+bode(OLTF)
+margin(OLTF)
+allmargin(OLTF)
+
+data = (reshape(velocity.data(1,1,1:end),[1001 1]))
+filewrite(data,'K=1(unst')
+
+function filewrite(x,name)
+ filename = append(name,'.txt');
+ % open your file for writing
+ file1 = fopen(filename,'wt');
+ % write the matrix
+ fprintf(file1,'%f\n',x');
+ % close the file
+ fclose(file1);
+end
+function xread = fileread(name)
+ filename = append(name,'.txt');
+ % open your file for reading
+ file1 = fopen(filename,'r');
+ % write the matrix
+ xread = fscanf(file1,'%f\n');
+ % close the file
+ fclose(file1);
+end 
